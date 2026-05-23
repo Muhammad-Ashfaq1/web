@@ -38,63 +38,13 @@
    <!-- main header -->
    @include('common.header')
    <!-- main-header end -->
-   <!-- banner-style-two -->
-   <section class="banner-style-two p_relative centred">
-      <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
-         <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url(/images/banner/Banner-01.png)"></div>
-            <div class="shape">
-               <div class="shape-1" style="background-image: url(/images/shape/shape-14.png);"></div>
-               <div class="shape-2" style="background-image: url(/images/shape/shape-14.png);"></div>
-            </div>
-            <div class="auto-container">
-               <div class="content-box p_relative d_block z_5">
-                  <span class="title-text p_relative d_block">Waste Pickup</span>
-                  <h2 class="p_relative d_block">Clean & Green Punjab, Strong Punjab</h2>
-                  <p class="p_relative d_block">A clean environment builds a healthier, stronger, and more developed Punjab.</p>
-                  <div class="btn-box">
-                     <a href="" class="theme-btn btn-one"><span>Read More</span></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url(/images/banner/banner-02.png)"></div>
-            <div class="shape">
-               <div class="shape-1" style="background-image: url(/images/shape/shape-14.png);"></div>
-               <div class="shape-2" style="background-image: url(/images/shape/shape-14.png);"></div>
-            </div>
-            <div class="auto-container">
-               <div class="content-box p_relative d_block z_5">
-                  <span class="title-text p_relative d_block">Waste Pickup</span>
-                  <h2 class="p_relative d_block">Your City,<br> Keep it Always Suthra</h2>
-                  <p class="p_relative d_block">Every citizen’s responsibility is the key to a beautiful and hygienic city.</p>
-                  <div class="btn-box">
-                     <a href="" class="theme-btn btn-one"><span>Read More</span></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url(/images/banner/banner-03.png)"></div>
-            <div class="shape">
-               <div class="shape-1" style="background-image: url(/images/shape/shape-14.png);"></div>
-               <div class="shape-2" style="background-image: url(/images/shape/shape-14.png);"></div>
-            </div>
-            <div class="auto-container">
-               <div class="content-box p_relative d_block z_5">
-                  <span class="title-text p_relative d_block">Waste Pickup</span>
-                  <h2 class="p_relative d_block">Cleaner Punjab, Greener Tomorrow</h2>
-                  <p class="p_relative d_block">Cleanliness today creates a greener and better future for coming generations.</p>
-                  <div class="btn-box">
-                     <a href="" class="theme-btn btn-one"><span>Read More</span></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- banner-style-two end -->
+
+   @if($promotions->count() > 0)
+      @include('common.promotion-modal', ['promotions' => $promotions])
+   @endif
+
+   @include('partials.home-slider')
+
     <section class="marquee-section">
 
     <div class="marquee-track">
