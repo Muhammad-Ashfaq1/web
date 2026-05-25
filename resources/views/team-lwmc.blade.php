@@ -25,102 +25,44 @@
       <section class="team-section team-page alternat-2 pt_150 pb_100 centred">
          <div class="auto-container">
             <div class="row clearfix">
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                  <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                     <div class="inner-box">
-                        <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-11.jpg" alt=""></a></figure>
-                        <div class="lower-content">
-                           <h3><a href="team-details.html">Guy Hawkins</a></h3>
-                           <span class="designation">Manager</span>
-
+               @if(isset($teamMembers) && $teamMembers->isNotEmpty())
+                  @foreach ($teamMembers as $teamMember)
+                     <div class="col-lg-3 col-md-6 col-sm-12 team-block">
+                        <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                           <div class="inner-box">
+                              <figure class="image-box"><a href="#"><img src="{{ $teamMember->image_url ?? 'https://ui-avatars.com/api/?name='.urlencode($teamMember->name).'&background=3a9e1e&color=fff&size=270' }}" alt="{{ $teamMember->name }}"></a></figure>
+                              <div class="lower-content">
+                                 <h3><a href="#">{{ $teamMember->name }}</a></h3>
+                                 <span class="designation">{{ $teamMember->designation->name ?? 'Team Member' }}</span>
+                              </div>
+                           </div>
                         </div>
                      </div>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                  <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                     <div class="inner-box">
-                        <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-12.jpg" alt=""></a></figure>
-                        <div class="lower-content">
-                           <h3><a href="team-details.html">Kristin Watson</a></h3>
-                           <span class="designation">Co-Founder</span>
-
+                  @endforeach
+               @else
+                  @foreach([
+                     ['image' => '/images/team/team-11.jpg', 'name' => 'Guy Hawkins', 'designation' => 'Manager'],
+                     ['image' => '/images/team/team-12.jpg', 'name' => 'Kristin Watson', 'designation' => 'Co-Founder'],
+                     ['image' => '/images/team/team-13.jpg', 'name' => 'Floyd Miles', 'designation' => 'Accountant'],
+                     ['image' => '/images/team/team-8.jpg', 'name' => 'Esther Howard', 'designation' => 'Manager'],
+                     ['image' => '/images/team/team-9.jpg', 'name' => 'Jacob Jones', 'designation' => 'Co-Founder'],
+                     ['image' => '/images/team/team-10.jpg', 'name' => 'Ralph Edwards', 'designation' => 'Accountant'],
+                     ['image' => '/images/team/team-10.jpg', 'name' => 'Ralph Edwards', 'designation' => 'Accountant'],
+                     ['image' => '/images/team/team-10.jpg', 'name' => 'Ralph Edwards', 'designation' => 'Accountant'],
+                  ] as $member)
+                     <div class="col-lg-3 col-md-6 col-sm-12 team-block">
+                        <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                           <div class="inner-box">
+                              <figure class="image-box"><a href="team-details.html"><img src="{{ $member['image'] }}" alt=""></a></figure>
+                              <div class="lower-content">
+                                 <h3><a href="team-details.html">{{ $member['name'] }}</a></h3>
+                                 <span class="designation">{{ $member['designation'] }}</span>
+                              </div>
+                           </div>
                         </div>
                      </div>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                  <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                     <div class="inner-box">
-                        <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-13.jpg" alt=""></a></figure>
-                        <div class="lower-content">
-                           <h3><a href="team-details.html">Floyd Miles</a></h3>
-                           <span class="designation">Accountant</span>
-
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                  <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                     <div class="inner-box">
-                        <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-8.jpg" alt=""></a></figure>
-                        <div class="lower-content">
-                           <h3><a href="team-details.html">Esther Howard</a></h3>
-                           <span class="designation">Manager</span>
-
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                  <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                     <div class="inner-box">
-                        <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-9.jpg" alt=""></a></figure>
-                        <div class="lower-content">
-                           <h3><a href="team-details.html">Jacob Jones</a></h3>
-                           <span class="designation">Co-Founder</span>
-
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                  <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                     <div class="inner-box">
-                        <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-10.jpg" alt=""></a></figure>
-                        <div class="lower-content">
-                           <h3><a href="team-details.html">Ralph Edwards</a></h3>
-                           <span class="designation">Accountant</span>
-
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                   <div class="inner-box">
-                      <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-10.jpg" alt=""></a></figure>
-                      <div class="lower-content">
-                         <h3><a href="team-details.html">Ralph Edwards</a></h3>
-                         <span class="designation">Accountant</span>
-
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                <div class="team-block-one mb_75 wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                   <div class="inner-box">
-                      <figure class="image-box"><a href="team-details.html"><img src="/images/team/team-10.jpg" alt=""></a></figure>
-                      <div class="lower-content">
-                         <h3><a href="team-details.html">Ralph Edwards</a></h3>
-                         <span class="designation">Accountant</span>
-
-                      </div>
-                   </div>
-                </div>
-             </div>
+                  @endforeach
+               @endif
             </div>
          </div>
       </section>

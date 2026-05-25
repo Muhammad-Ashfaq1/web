@@ -34,25 +34,30 @@
                 <nav class="main-menu navbar-expand-md navbar-light clearfix">
                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                         <ul class="navigation clearfix">
-                            <li class="current"><a href="/">Home</a></li>
-                            <li class="dropdown"><a href="">About LWMC</a>
+                            <li class="{{ Request::is('/') ? 'current' : '' }}"><a href="/">Home</a></li>
+                            <li class="dropdown {{ Request::is('About-Suthra-Punjab*') || Request::is('company-profile*') || Request::is('register-volunteer*') || Request::is('membership*') || Request::is('*-Department*') || Request::is('Board-of-Directors*') || Request::is('LWMC-Organogram*') || Request::is('Right-to-Information*') || Request::is('WMC-PMU-Summary*') ? 'current' : '' }}"><a href="">About LWMC</a>
                                 <ul>
                                     <li><a href="About-Suthra-Punjab">Suthra Punjab Program</a></li>
                                     <li><a href="company-profile">Company Profile</a></li>
                                     <li><a href="register-volunteer">Volunteer Registration</a></li>
                                     <li><a href="membership">Membership</a></li>
-                                    <li class="dropdown"><a href="">Our Departments</a>
+                                    <li class="dropdown"><a href="{{ route('departments') }}">Our Departments</a>
                                         <ul>
-                                            <li><a href="">General</a></li>
-                                            <li><a href="HR-Department">HR & Administration</a></li>
-                                            <li><a href="MIS-Department">MIS</a></li>
-                                            <li><a href="Planning-Department">Planning & Project</a></li>
-                                            <li><a href="Communication-Department">Communication</a></li>
-                                            <li><a href="Finance-Department">Finance</a></li>
-                                            <li><a href="Operations-Department">Operations</a></li>
-                                            <li><a href="Legal-Department">Legal & Corporate Affairs</a></li>
-                                            <li><a href="Procurement-Department">Procurement & Contract</a></li>
-                                            <li><a href="Audit-Department">Internal Auditor</a></li>
+                                            @if(isset($departmentsNav) && $departmentsNav->isNotEmpty())
+                                                @foreach($departmentsNav as $department)
+                                                    <li><a href="{{ route('department.employees', ['id' => $department->id]) }}">{{ $department->name }}</a></li>
+                                                @endforeach
+                                            @else
+                                                <li><a href="HR-Department">HR & Administration</a></li>
+                                                <li><a href="MIS-Department">MIS</a></li>
+                                                <li><a href="Planning-Department">Planning & Project</a></li>
+                                                <li><a href="Communication-Department">Communication</a></li>
+                                                <li><a href="Finance-Department">Finance</a></li>
+                                                <li><a href="Operations-Department">Operations</a></li>
+                                                <li><a href="Legal-Department">Legal & Corporate Affairs</a></li>
+                                                <li><a href="Procurement-Department">Procurement & Contract</a></li>
+                                                <li><a href="Audit-Department">Internal Auditor</a></li>
+                                            @endif
                                         </ul>
                                     </li>
                                     <li><a href="Board-of-Directors">Board of Directors</a></li>
@@ -62,36 +67,38 @@
                                     <li><a href="upload/code of conduct.pdf">Code of Conduct</a></li>
                                 </ul>
                             </li>
-                            <li class=""><a href="LWMC-Careers">Career</a>
+                            <li class="{{ Request::is('LWMC-Careers*') ? 'current' : '' }}"><a href="LWMC-Careers">Career</a>
 
                             </li>
-                            <li class="dropdown"><a href="">Procurements</a>
+                            <li class="dropdown {{ Request::is('Bid-Documents*') || Request::is('procurements*') ? 'current' : '' }}"><a href="">Procurements</a>
                                 <ul>
-                                    <li><a href="Bid-Documents">Bidding Document</a></li>
-                                    <li><a href="">Eid-ul-Azha</a></li>
-                                    <li><a href="">Past Procurements</a></li>
-                                    <li><a href="">Active Procurements</a></li>
-                                    <li><a href="">Future Procurements</a></li>
-                                    <li><a href="">Evaluation Report</a></li>
-                                    <li><a href="">Blacklisted Firms</a></li>
+                                    @foreach($procurementTypes as $procurementType)
+                                        <li><a href="{{ $procurementType->value === 'bidding-document' ? route('procurements.bidding') : route('procurements.nav', ['type' => $procurementType->value]) }}">{{ $procurementType->label() }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="">Our Services</a>
+                            <li class="dropdown {{ Request::is('Waste-Collection*') || Request::is('services*') ? 'current' : '' }}"><a href="">Our Services</a>
                                 <ul>
-                                    <li><a href="Waste-Collection">Waste Collection</a></li>
-                                    <li><a href="">Mechanical Sweeping</a></li>
-                                    <li><a href="">Mechanical Washing</a></li>
-                                    <li><a href="">Manual Sweeping</a></li>
-                                    <li><a href="">Operations at Fruit & Vegetable Markets</a></li>
-                                    <li><a href="">Operations at Special Occassions</a></li>
-                                    <li><a href="">Ficilitation for Corporative Housing Society</a></li>
-                                    <li><a href="">Mist Machine</a></li>
+                                    @if(isset($swmOperationsNav) && $swmOperationsNav->isNotEmpty())
+                                        @foreach($swmOperationsNav as $operation)
+                                            <li><a href="{{ route('services.show', ['operation' => $operation->id]) }}">{{ $operation->title }}</a></li>
+                                        @endforeach
+                                    @else
+                                        <li><a href="Waste-Collection">Waste Collection</a></li>
+                                        <li><a href="">Mechanical Sweeping</a></li>
+                                        <li><a href="">Mechanical Washing</a></li>
+                                        <li><a href="">Manual Sweeping</a></li>
+                                        <li><a href="">Operations at Fruit & Vegetable Markets</a></li>
+                                        <li><a href="">Operations at Special Occassions</a></li>
+                                        <li><a href="">Ficilitation for Corporative Housing Society</a></li>
+                                        <li><a href="">Mist Machine</a></li>
+                                    @endif
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="">Media Gallery</a>
+                            <li class="dropdown {{ Request::is('Gallery*') || Request::is('Video-Gallery*') || Request::is('brochures*') ? 'current' : '' }}"><a href="">Media Gallery</a>
                                 <ul>
                                     <li><a href="">News & Updates</a></li>
-                                    <li><a href="Gallery">Pictures</a></li>
+                                    <li><a href="{{ route('gallery') }}">Pictures</a></li>
                                     <li><a href="Video-Gallery">Videos</a></li>
                                     <li><a href="">News Letters</a></li>
                                     <li><a href="brochures">Brouchers</a></li>
@@ -99,7 +106,7 @@
                                     <li><a href="">LWMC News Line</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="">Our Plans</a>
+                            <li class="dropdown {{ Request::is('plans*') || Request::is('projects*') ? 'current' : '' }}"><a href="">Our Plans</a>
                                 <ul>
                                     <li><a href="">All Plans</a></li>
                                     <li><a href="">All Projects</a></li>
@@ -108,14 +115,14 @@
                                     <li><a href="">UC Wise Plan</a></li>
                                 </ul>
                             </li>
-                            <li><a href="Contact-Us">Contact</a></li>
+                            <li class="{{ Request::is('Contact-Us*', 'request-bin*', 'file-complaint*') ? 'current' : '' }}"><a href="{{ route('contact.index') }}">Contact</a></li>
                         </ul>
                     </div>
                 </nav>
                 <ul class="menu-right-content">
 
                     <li class="btn-box">
-                        <a href="" class="theme-btn btn-one"><span>Request A Bin</span></a>
+                        <a href="{{ route('contact.bin-request') }}" class="theme-btn btn-one"><span>Request A Bin</span></a>
                     </li>
                 </ul>
             </div>
@@ -136,7 +143,7 @@
                     <ul class="menu-right-content">
 
                         <li class="btn-box">
-                            <a href="" class="theme-btn btn-one"><span>Request A Bin</span></a>
+                            <a href="{{ route('contact.bin-request') }}" class="theme-btn btn-one"><span>Request A Bin</span></a>
                         </li>
                     </ul>
                 </div>
@@ -170,3 +177,5 @@
         </div>
     </nav>
 </div>
+
+

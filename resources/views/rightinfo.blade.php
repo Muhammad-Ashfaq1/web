@@ -38,45 +38,89 @@
                            <div class="acc-content current">
                               <div class="text">
                                  <table cellspacing="0" width="100%" class="display table table-striped table-bordered  table-responsive table-hover table-condensed cf" cellpadding="2">
-                                    <tbody>
-                                       <tr>
-                                          <td colspan="2">Lahore Waste Management Company has nominated its departmental Public Information
-                                             Officer (PIO) with following details:
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td colspan="2"></td>
-                                       </tr>
-                                       <tr>
-                                          <td><b>Name</b></td>
-                                          <td>Mr. Umar Chaudhary</td>
-                                       </tr>
-                                       <tr>
-                                          <td><b>Designation</b></td>
-                                          <td>Sr.Manager Communication</td>
-                                       </tr>
-                                       <tr>
-                                          <td><b>Email</b></td>
-                                          <td>umar.farooq@lwmc.com.pk</td>
-                                       </tr>
-                                       <tr>
-                                          <td><b>Phone#</b></td>
-                                          <td> +92 42 99205153-55</td>
-                                       </tr>
-                                       <tr>
-                                          <td><b>Office/Postal Address</b></td>
-                                          <td>4th floor Shaheen Complex Egerton Road Lahore, PAKISTAN.</td>
-                                       </tr>
-                                       <tr>
-                                          <td colspan="2"></td>
-                                       </tr>
-                                       <tr>
-                                          <td colspan="2">Any person/organization interested in soliciting information under
-                                             The Punjab Transparency &amp; Right to Information Act, 2013 may contact
-                                             the LWMC-PIO in writing.
-                                          </td>
-                                       </tr>
-                                    </tbody>
+                                    @if(!empty($right_to_informations) && $right_to_informations->isNotEmpty())
+                                       @foreach($right_to_informations as $right_to_information)
+                                          <tbody>
+                                             <tr>
+                                                <td colspan="2">Lahore Waste Management Company has nominated its departmental Public Information
+                                                   Officer (PIO) with following details:
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="2"></td>
+                                             </tr>
+                                             <tr>
+                                                <td><b>Name</b></td>
+                                                <td>{{ $right_to_information->name }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td><b>Designation</b></td>
+                                                <td>{{ $right_to_information->designation->name ?? 'N/A' }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td><b>Email</b></td>
+                                                <td>{{ $right_to_information->email }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td><b>Phone#</b></td>
+                                                <td>{{ $right_to_information->phone }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td><b>Office/Postal Address</b></td>
+                                                <td>{{ $right_to_information->address }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="2"></td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="2">Any person/organization interested in soliciting information under
+                                                   The Punjab Transparency &amp; Right to Information Act, 2013 may contact
+                                                   the LWMC-PIO in writing.
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       @endforeach
+                                    @else
+                                       <tbody>
+                                          <tr>
+                                             <td colspan="2">Lahore Waste Management Company has nominated its departmental Public Information
+                                                Officer (PIO) with following details:
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td colspan="2"></td>
+                                          </tr>
+                                          <tr>
+                                             <td><b>Name</b></td>
+                                             <td>Mr. Umar Chaudhary</td>
+                                          </tr>
+                                          <tr>
+                                             <td><b>Designation</b></td>
+                                             <td>Sr.Manager Communication</td>
+                                          </tr>
+                                          <tr>
+                                             <td><b>Email</b></td>
+                                             <td>umar.farooq@lwmc.com.pk</td>
+                                          </tr>
+                                          <tr>
+                                             <td><b>Phone#</b></td>
+                                             <td> +92 42 99205153-55</td>
+                                          </tr>
+                                          <tr>
+                                             <td><b>Office/Postal Address</b></td>
+                                             <td>4th floor Shaheen Complex Egerton Road Lahore, PAKISTAN.</td>
+                                          </tr>
+                                          <tr>
+                                             <td colspan="2"></td>
+                                          </tr>
+                                          <tr>
+                                             <td colspan="2">Any person/organization interested in soliciting information under
+                                                The Punjab Transparency &amp; Right to Information Act, 2013 may contact
+                                                the LWMC-PIO in writing.
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    @endif
                                  </table>
                               </div>
                            </div>

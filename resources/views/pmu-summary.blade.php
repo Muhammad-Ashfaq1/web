@@ -43,46 +43,65 @@
                                              <p><strong>Summary Report</strong></p>
                                           </td>
                                        </tr>
-                                       <tr>
-                                          <td width="66">
-                                             <p><strong>1</strong></p>
-                                          </td>
-                                          <td width="602">
-                                             <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 13th June 2020.pdf" target="_blank">13-06-2020</a></p>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td width="66">
-                                             <p><strong>2</strong></p>
-                                          </td>
-                                          <td width="602">
-                                             <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 18th June 2020.pdf" target="_blank">18-06-2020</a></p>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td width="66">
-                                             <p><strong>3</strong></p>
-                                          </td>
-                                          <td width="602">
-                                             <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 20th June 2020.pdf" target="_blank">20-06-2020</a></p>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td width="66">
-                                             <p><strong>4</strong></p>
-                                          </td>
-                                          <td width="602">
-                                             <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 22th June 2020.pdf" target="_blank">22-06-2020</a></p>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td width="66">
-                                             <p><strong>5</strong></p>
-                                          </td>
-                                          <td width="602">
-                                             <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 23th June 2020.pdf" target="_blank">23-06-2020</a></p>
-                                          </td>
-                                       </tr>
+                                       @if(isset($summaries) && $summaries->isNotEmpty())
+                                          @foreach($summaries as $summary)
+                                             <tr>
+                                                <td width="66">
+                                                   <p><strong>{{ $loop->iteration }}</strong></p>
+                                                </td>
+                                                <td width="602">
+                                                   <p>
+                                                      @if($summary->attachment_url)
+                                                         <a href="{{ $summary->attachment_url }}" target="_blank">{{ $summary->date?->format('d-m-Y') ?? $summary->title }}</a>
+                                                      @else
+                                                         {{ $summary->date?->format('d-m-Y') ?? $summary->title }}
+                                                      @endif
+                                                   </p>
+                                                </td>
+                                             </tr>
+                                          @endforeach
+                                       @else
+                                          <tr>
+                                             <td width="66">
+                                                <p><strong>1</strong></p>
+                                             </td>
+                                             <td width="602">
+                                                <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 13th June 2020.pdf" target="_blank">13-06-2020</a></p>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td width="66">
+                                                <p><strong>2</strong></p>
+                                             </td>
+                                             <td width="602">
+                                                <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 18th June 2020.pdf" target="_blank">18-06-2020</a></p>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td width="66">
+                                                <p><strong>3</strong></p>
+                                             </td>
+                                             <td width="602">
+                                                <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 20th June 2020.pdf" target="_blank">20-06-2020</a></p>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td width="66">
+                                                <p><strong>4</strong></p>
+                                             </td>
+                                             <td width="602">
+                                                <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 22th June 2020.pdf" target="_blank">22-06-2020</a></p>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td width="66">
+                                                <p><strong>5</strong></p>
+                                             </td>
+                                             <td width="602">
+                                                <p><a href="pmu-summary/Daily WMCs PMU Summary Report, 23th June 2020.pdf" target="_blank">23-06-2020</a></p>
+                                             </td>
+                                          </tr>
+                                       @endif
                                     </tbody>
                                  </table>
                               </div>

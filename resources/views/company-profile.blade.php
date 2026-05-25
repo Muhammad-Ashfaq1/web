@@ -1,5 +1,11 @@
 @extends('common.master')
 @section('content')
+@php
+    $allowedRichTextTags = '<p><br><strong><b><em><i><u><a><ul><ol><li><h1><h2><h3><h4><h5><h6>';
+    $featuredColumns = isset($featuredActive) && $featuredActive->isNotEmpty()
+        ? $featuredActive->values()->chunk((int) ceil($featuredActive->count() / 2))
+        : collect();
+@endphp
 <body style="zoom: 90%;">
 
     <div class="boxed_wrapper ltr">
@@ -41,11 +47,15 @@
                             <div class="content-box mr_40">
                                 <div class="sec-title mb_25">
                                     <span class="sub-title">About Us</span>
-                                    <h2>Lahore Waste <span style="color: green"> Management Company</span></h2>
+                                    <h2>{{ $companyProfile?->title ?? 'Lahore Waste' }}<span style="color: green"> {{ $companyProfile?->highlight_title ?? 'Management Company' }}</span></h2>
                                 </div>
-                                <p style="text-align: justify">Solid Waste Management (SWM) has long been a neglected sector due to lack of strong commitment on the part of government. City District Government Lahore (CDGL) established LWMC under section 42 of the Companies Ordinance 1984 on 19th March 2010. The company is limited by guarantee having no share capital and is formed not for profit within the meaning of Section-42 of the Companies Ordinance. The LMWC is governed by a Board of Directors (BODs), headed by a Chairman.</p>
+                                @if($companyProfile?->description)
+                                    <div style="text-align: justify">{!! strip_tags((string) $companyProfile->description, $allowedRichTextTags) !!}</div>
+                                @else
+                                    <p style="text-align: justify">Solid Waste Management (SWM) has long been a neglected sector due to lack of strong commitment on the part of government. City District Government Lahore (CDGL) established LWMC under section 42 of the Companies Ordinance 1984 on 19th March 2010. The company is limited by guarantee having no share capital and is formed not for profit within the meaning of Section-42 of the Companies Ordinance. The LMWC is governed by a Board of Directors (BODs), headed by a Chairman.</p>
+                                @endif
                                 <ul class="list-style-one mb_35 clearfix">
-                                    <li style="font-style: italic;text-align: justify;color: #17391a; background-color: #ecf0f0">Through an agreement called SAAMA(Services and Asset Management Agreement), all the functions and assets of SWM department of CDGL and the TMAs has been entrusted to LWMC. LWMC aims to develop an integrated system of solid waste management to ensure efficient collection, transportation, recovery, treatment and disposal of the waste generated in Lahore.</li>
+                                    <li style="font-style: italic;text-align: justify;color: #17391a; background-color: #ecf0f0">{{ $companyProfile?->highlight_note ?? 'Through an agreement called SAAMA(Services and Asset Management Agreement), all the functions and assets of SWM department of CDGL and the TMAs has been entrusted to LWMC. LWMC aims to develop an integrated system of solid waste management to ensure efficient collection, transportation, recovery, treatment and disposal of the waste generated in Lahore.' }}</li>
                                 </ul>
                                 <div class="btn-box">
                                     <a href="contact.html" class="theme-btn btn-one shadow"><span>Contact Us</span></a>
@@ -57,9 +67,17 @@
                         <div class="image_block_one">
                             <div class="image-box pl_130 ml_30">
                                 <div class="image-shape"><img src="/images/shape/shape-3.png" alt=""></div>
-                                <figure class="image image-1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj8hzj1VtifkTwPWu1oMOo8NfzlI5xM4koTA&s" alt=""></figure>
-                                <figure class="image image-2"><img src="/images/resource/images.jpg" alt=""></figure>
-                                <figure class="image image-3"><img src="/images/resource/about-3.png" alt=""></figure>
+                                <figure class="image image-1">
+                                    @if($companyProfile?->about_video_url)
+                                        <a href="{{ $companyProfile->about_video_url }}" class="lightbox-image" data-caption="">
+                                            <img src="{{ $companyProfile?->background_image ?: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj8hzj1VtifkTwPWu1oMOo8NfzlI5xM4koTA&s' }}" alt="">
+                                        </a>
+                                    @else
+                                        <img src="{{ $companyProfile?->background_image ?: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj8hzj1VtifkTwPWu1oMOo8NfzlI5xM4koTA&s' }}" alt="">
+                                    @endif
+                                </figure>
+                                <figure class="image image-2"><img src="{{ $companyProfile?->image_two_url ?: '/images/resource/images.jpg' }}" alt=""></figure>
+                                <figure class="image image-3"><img src="{{ $companyProfile?->image_one_url ?: '/images/resource/about-3.png' }}" alt=""></figure>
                             </div>
                         </div>
                     </div>
@@ -73,6 +91,29 @@
         <section class="faq-section" style="padding: 0px 0px 150px 0px">
             <div class="auto-container">
                 <div class="row clearfix">
+                    @if(isset($featuredActive) && $featuredActive->isNotEmpty())
+                        @foreach($featuredColumns as $column)
+                            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                                <div class="content-box">
+                                    <ul class="accordion-box">
+                                        @foreach($column as $operation)
+                                            <li class="accordion block">
+                                                <div class="acc-btn {{ $loop->parent->first && $loop->first ? 'active' : '' }}">
+                                                    <div class="icon-box"><i class="icon-33"></i></div>
+                                                    <h4>{{ $operation->title }}</h4>
+                                                </div>
+                                                <div class="acc-content {{ $loop->parent->first && $loop->first ? 'current' : '' }}">
+                                                    <div class="text" style="text-align: justify">
+                                                        {!! strip_tags((string) $operation->description, $allowedRichTextTags) !!}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
                     <div class="col-lg-6 col-md-12 col-sm-12 content-column">
                         <div class="content-box">
                             <ul class="accordion-box">
@@ -132,6 +173,7 @@
                         </div>
                     </div>
 
+                    @endif
                 </div>
 
             </div>
@@ -144,6 +186,23 @@
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12 col-sm-12 content-column">
                         <div class="content-box">
+                            @if(isset($featureUnActive) && $featureUnActive->isNotEmpty())
+                                <ul class="accordion-box">
+                                    @foreach($featureUnActive as $operation)
+                                        <li class="accordion block">
+                                            <div class="acc-btn {{ $loop->first ? 'active' : '' }}">
+                                                <div class="icon-box"><i class="icon-33"></i></div>
+                                                <h4>{{ $operation->title }}</h4>
+                                            </div>
+                                            <div class="acc-content {{ $loop->first ? 'current' : '' }}">
+                                                <div class="text" style="text-align: justify">
+                                                    {!! strip_tags((string) $operation->description, $allowedRichTextTags) !!}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
                             <ul class="accordion-box">
                                 <li class="accordion block">
                                     <div class="acc-btn active">
@@ -268,6 +327,7 @@
                                 </li>
 
                             </ul>
+                            @endif
                         </div>
                     </div>
 
