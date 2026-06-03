@@ -42,10 +42,10 @@
    <section class="banner-style-two p_relative centred">
       <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
          <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url(/images/banner/Banner-01.png)"></div>
+            <div class="bg-layer" style="background-image:url({{ asset('images/banner/Banner-01.png') }})"></div>
             <div class="shape">
-               <div class="shape-1" style="background-image: url(/images/shape/shape-14.png);"></div>
-               <div class="shape-2" style="background-image: url(/images/shape/shape-14.png);"></div>
+               <div class="shape-1" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
+               <div class="shape-2" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
             </div>
             <div class="auto-container">
                <div class="content-box p_relative d_block z_5">
@@ -59,10 +59,10 @@
             </div>
          </div>
          <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url(/images/banner/banner-02.png)"></div>
+            <div class="bg-layer" style="background-image:url({{ asset('images/banner/banner-02.png') }})"></div>
             <div class="shape">
-               <div class="shape-1" style="background-image: url(/images/shape/shape-14.png);"></div>
-               <div class="shape-2" style="background-image: url(/images/shape/shape-14.png);"></div>
+               <div class="shape-1" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
+               <div class="shape-2" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
             </div>
             <div class="auto-container">
                <div class="content-box p_relative d_block z_5">
@@ -76,10 +76,10 @@
             </div>
          </div>
          <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url(/images/banner/banner-03.png)"></div>
+            <div class="bg-layer" style="background-image:url({{ asset('images/banner/banner-03.png') }})"></div>
             <div class="shape">
-               <div class="shape-1" style="background-image: url(/images/shape/shape-14.png);"></div>
-               <div class="shape-2" style="background-image: url(/images/shape/shape-14.png);"></div>
+               <div class="shape-1" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
+               <div class="shape-2" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
             </div>
             <div class="auto-container">
                <div class="content-box p_relative d_block z_5">
@@ -103,57 +103,57 @@
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Clean Environment</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Urban Cleanliness</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Waste to Value</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Environmental Protection</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <!-- DUPLICATE FOR SMOOTH LOOP -->
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Sustainable Cleaning</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Zero Waste Mission</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Public Hygiene</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
       <div class="marquee-item">
         <span style="margin-left: 3rem !important;">Eco-Friendly Operations</span>
 
-        <img src="images/resource/logo-icon-line.webp" class="abs abs-middle w-40px" alt="">
+        <img src="{{ asset('images/resource/logo-icon-line.webp') }}" class="abs abs-middle w-40px" alt="">
       </div>
 
     </div>
 
   </section>
    <!-- feature-style-two -->
-   <section class="feature-style-two sec-pad centred" style="background-image: url(/images/shape/shape-1.png); padding: 60px 0px 30px 0px">
+   <section class="feature-style-two sec-pad centred" style="background-image: url({{ asset('images/shape/shape-1.png') }}); padding: 60px 0px 30px 0px">
       <div class="auto-container">
          <div class="sec-title mb_50" style="margin-bottom: 96px;">
             <h2>A wide range of <span style="color:#3a9e1e;"> Waste Management Services</span></h2>
@@ -163,8 +163,8 @@
                <div class="feature-block-two wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                   <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
                      <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url(/images/shape/shape-18.png);"></div>
-                        <div class="overlay-shape" style="background-image: url(/images/shape/shape-19.png);"></div>
+                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
                         <div class="icon"><i class="icon-31"></i></div>
                      </div>
                      <h5><a href="" style="color:black;">Waste Collection</a></h5>
@@ -175,8 +175,8 @@
                <div class="feature-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                   <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
                      <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url(/images/shape/shape-18.png);"></div>
-                        <div class="overlay-shape" style="background-image: url(/images/shape/shape-19.png);"></div>
+                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
                         <div class="icon"><i class="fa fa-truck-container"></i></div>
                      </div>
                      <h5><a href="" style="color:black;">Mechanical Sweeping</a></h5>
@@ -187,8 +187,8 @@
                <div class="feature-block-two wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
                   <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
                      <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url(/images/shape/shape-18.png);"></div>
-                        <div class="overlay-shape" style="background-image: url(/images/shape/shape-19.png);"></div>
+                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
                         <div class="icon"><i class="icon-29"></i></div>
                      </div>
                      <h5 style="color:black;"><a href="" style="color:black;">Mechanical Washing</a></h5>
@@ -199,8 +199,8 @@
                <div class="feature-block-two wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
                   <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
                      <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url(/images/shape/shape-18.png);"></div>
-                        <div class="overlay-shape" style="background-image: url(/images/shape/shape-19.png);"></div>
+                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
                         <div class="icon"><i class="fa fa-broom"></i></div>
                      </div>
                      <h5><a href="" style="color:black;">Manual Sweeping</a></h5>
@@ -211,8 +211,8 @@
                <div class="feature-block-two wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                   <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
                      <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url(/images/shape/shape-18.png);"></div>
-                        <div class="overlay-shape" style="background-image: url(/images/shape/shape-19.png);"></div>
+                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
                         <div class="icon"><i class="fa fa-industry-alt"></i></div>
                      </div>
                      <h5><a href="" style="color:black;">Waste to Energy</a></h5>
@@ -223,8 +223,8 @@
                <div class="feature-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                   <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
                      <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url(/images/shape/shape-18.png);"></div>
-                        <div class="overlay-shape" style="background-image: url(/images/shape/shape-19.png);"></div>
+                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
                         <div class="icon"><i class="icon-12"></i></div>
                      </div>
                      <h5><a href="" style="color:black;">Sanitary Landfill Site</a></h5>
@@ -245,9 +245,9 @@
             <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                <div class="image_block_three">
                   <div class="image-box mr_30">
-                     <div class="image-shape" style="background-image: url(/images/shape/shape-3.png);"></div>
-                     <figure class="image image-1" style="box-shadow: 0px 20px 100px rgb(164 165 163 / 61%)"><img src="/images/team/DG-SPA.jpg" alt=""></figure>
-                     <figure class="image image-2" style="box-shadow: 0px 20px 100px rgb(103 253 10 / 61%"><img src="/images/logo1.png" alt=""></figure>
+                     <div class="image-shape" style="background-image: url({{ asset('images/shape/shape-3.png') }});"></div>
+                     <figure class="image image-1" style="box-shadow: 0px 20px 100px rgb(164 165 163 / 61%)"><img src="{{ asset('images/team/DG-SPA.jpg') }}" alt=""></figure>
+                     <figure class="image image-2" style="box-shadow: 0px 20px 100px rgb(103 253 10 / 61%"><img src="{{ asset('images/logo1.png') }}" alt=""></figure>
                      <div class="video-box">
                         <a href="https://youtu.be/NUzgZwF2tXU" class="lightbox-image" data-caption=""><i class="icon-28"></i></a>
                      </div>
@@ -360,11 +360,11 @@
             <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                <div class="image_block_four">
                   <div class="image-box ml_30">
-                     <div class="image-shape" style="background-image: url(/images/shape/shape-22.png);"></div>
+                     <div class="image-shape" style="background-image: url({{ asset('images/shape/shape-22.png') }});"></div>
                      <iframe width="580" height="450"
                         src="https://www.youtube.com/embed/tNW84qqMHyU">
                      </iframe>
-                     <figure class="image image-2" style="box-shadow: 0px 20px 100px rgb(103 253 10 / 61%"><img src="/images/logo1.png" alt=""></figure>
+                     <figure class="image image-2" style="box-shadow: 0px 20px 100px rgb(103 253 10 / 61%"><img src="{{ asset('images/logo1.png') }}" alt=""></figure>
                   </div>
                </div>
             </div>
@@ -373,7 +373,7 @@
    </section>
    <!-- faq-section end -->
     <section class="cta-style-three p_relative pt_150 pb_150">
-            <div class="bg-layer parallax-bg" data-parallax="{&quot;y&quot;: 100}" style="transform:translate3d(0px, 100px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1); -webkit-transform:translate3d(0px, 100px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1); background-image: url(/images/background/bin.jpeg);"></div>
+            <div class="bg-layer parallax-bg" data-parallax="{&quot;y&quot;: 100}" style="transform:translate3d(0px, 100px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1); -webkit-transform:translate3d(0px, 100px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1); background-image: url({{ asset('images/background/bin.jpeg') }});"></div>
             <div class="auto-container">
                 <div class="inner-box">
                     <h2>Request a <span>bin</span> &amp; or <span> report</span> a sanitation issue with one click.</h2>
@@ -395,7 +395,7 @@
                <div class="inner-box">
                   <div class="text-box">
                      <p>وزیراعلیٰ پنجاب مریم نواز شریف کے ویژن ستھرا پنجاب پر عملدر آمد جاری،ایل ڈبلیو ایم سی کے محنتی ورکرز شہر لاہور کو صاف اور شفاف رکھنے کیلئے فیلڈ میں متحرک</p>
-                     <figure class="thumb-box"><img src="/images/resource/testimonial-1.png" alt=""></figure>
+                     <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
                   </div>
                   <div class="author-box">
                      <h3>CEO Visited Ravi Town</h3>
@@ -407,7 +407,7 @@
                <div class="inner-box">
                   <div class="text-box">
                      <p>وزیراعلیٰ پنجاب مریم نواز شریف کے ویژن ستھرا پنجاب پر عملدر آمد جاری،ایل ڈبلیو ایم سی کے محنتی ورکرز شہر لاہور کو صاف اور شفاف رکھنے کیلئے فیلڈ میں متحرک</p>
-                     <figure class="thumb-box"><img src="/images/resource/testimonial-1.png" alt=""></figure>
+                     <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
                   </div>
                   <div class="author-box">
                      <h3>CEO Visited Ravi Town</h3>
@@ -419,7 +419,7 @@
                <div class="inner-box">
                   <div class="text-box">
                      <p>وزیراعلیٰ پنجاب مریم نواز شریف کے ویژن ستھرا پنجاب پر عملدر آمد جاری،ایل ڈبلیو ایم سی کے محنتی ورکرز شہر لاہور کو صاف اور شفاف رکھنے کیلئے فیلڈ میں متحرک</p>
-                     <figure class="thumb-box"><img src="/images/resource/testimonial-1.png" alt=""></figure>
+                     <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
                   </div>
                   <div class="author-box">
                      <h3>CEO Visited Ravi Town</h3>
@@ -434,9 +434,9 @@
    <!-- clients-section -->
    <section class="subscribe-section">
             <div class="pattern-layer">
-                <div class="pattern-1" style="background-image: url(/images/shape/shape-12.png);"></div>
-                <div class="pattern-2" style="background-image: url(/images/shape/shape-2.png);"></div>
-                <div class="pattern-3" style="background-image: url(/images/shape/shape-2.png);"></div>
+                <div class="pattern-1" style="background-image: url({{ asset('images/shape/shape-12.png') }});"></div>
+                <div class="pattern-2" style="background-image: url({{ asset('images/shape/shape-2.png') }});"></div>
+                <div class="pattern-3" style="background-image: url({{ asset('images/shape/shape-2.png') }});"></div>
             </div>
             <div class="auto-container">
                 <div class="row clearfix">
