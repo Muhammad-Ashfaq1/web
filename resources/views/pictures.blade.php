@@ -30,6 +30,13 @@
 
     <div class="gallery">
 
+      @if(isset($images) && $images->isNotEmpty())
+        @foreach($images as $image)
+          <div class="gallery-item">
+            <img src="{{ $image->image_url }}" alt="{{ $image->title ?? 'LWMC Gallery' }}">
+          </div>
+        @endforeach
+      @else
       <div class="gallery-item">
         <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800" alt="">
       </div>
@@ -65,6 +72,7 @@
       <div class="gallery-item">
         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800" alt="">
       </div>
+      @endif
 
     </div>
 
@@ -114,3 +122,4 @@
    </div>
 </body>
 @endsection
+

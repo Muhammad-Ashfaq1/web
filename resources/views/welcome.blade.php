@@ -38,63 +38,13 @@
    <!-- main header -->
    @include('common.header')
    <!-- main-header end -->
-   <!-- banner-style-two -->
-   <section class="banner-style-two p_relative centred">
-      <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
-         <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url({{ asset('images/banner/Banner-01.png') }})"></div>
-            <div class="shape">
-               <div class="shape-1" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
-               <div class="shape-2" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
-            </div>
-            <div class="auto-container">
-               <div class="content-box p_relative d_block z_5">
-                  <span class="title-text p_relative d_block">Waste Pickup</span>
-                  <h2 class="p_relative d_block">Clean & Green Punjab, Strong Punjab</h2>
-                  <p class="p_relative d_block">A clean environment builds a healthier, stronger, and more developed Punjab.</p>
-                  <div class="btn-box">
-                     <a href="" class="theme-btn btn-one"><span>Read More</span></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url({{ asset('images/banner/banner-02.png') }})"></div>
-            <div class="shape">
-               <div class="shape-1" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
-               <div class="shape-2" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
-            </div>
-            <div class="auto-container">
-               <div class="content-box p_relative d_block z_5">
-                  <span class="title-text p_relative d_block">Waste Pickup</span>
-                  <h2 class="p_relative d_block">Your City,<br> Keep it Always Suthra</h2>
-                  <p class="p_relative d_block">Every citizen’s responsibility is the key to a beautiful and hygienic city.</p>
-                  <div class="btn-box">
-                     <a href="" class="theme-btn btn-one"><span>Read More</span></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="slide-item p_relative">
-            <div class="bg-layer" style="background-image:url({{ asset('images/banner/banner-03.png') }})"></div>
-            <div class="shape">
-               <div class="shape-1" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
-               <div class="shape-2" style="background-image: url({{ asset('images/shape/shape-14.png') }});"></div>
-            </div>
-            <div class="auto-container">
-               <div class="content-box p_relative d_block z_5">
-                  <span class="title-text p_relative d_block">Waste Pickup</span>
-                  <h2 class="p_relative d_block">Cleaner Punjab, Greener Tomorrow</h2>
-                  <p class="p_relative d_block">Cleanliness today creates a greener and better future for coming generations.</p>
-                  <div class="btn-box">
-                     <a href="" class="theme-btn btn-one"><span>Read More</span></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- banner-style-two end -->
+
+   @if($promotions->count() > 0)
+      @include('common.promotion-modal', ['promotions' => $promotions])
+   @endif
+
+   @include('partials.home-slider')
+
     <section class="marquee-section">
 
     <div class="marquee-track">
@@ -159,81 +109,59 @@
             <h2>A wide range of <span style="color:#3a9e1e;"> Waste Management Services</span></h2>
          </div>
          <div class="row clearfix">
-            <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
-               <div class="feature-block-two wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                  <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
-                     <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
-                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
-                        <div class="icon"><i class="icon-31"></i></div>
+            @php
+               $fallbackServices = [
+                  ['title' => 'Waste Collection', 'icon' => 'icon-31', 'delay' => '600ms', 'url' => route('waste-collection')],
+                  ['title' => 'Mechanical Sweeping', 'icon' => 'fa fa-truck-container', 'delay' => '00ms', 'url' => ''],
+                  ['title' => 'Mechanical Washing', 'icon' => 'icon-29', 'delay' => '200ms', 'url' => ''],
+                  ['title' => 'Manual Sweeping', 'icon' => 'fa fa-broom', 'delay' => '400ms', 'url' => ''],
+                  ['title' => 'Waste to Energy', 'icon' => 'fa fa-industry-alt', 'delay' => '600ms', 'url' => ''],
+                  ['title' => 'Sanitary Landfill Site', 'icon' => 'icon-12', 'delay' => '00ms', 'url' => ''],
+               ];
+               $services = (isset($swm_operations) && $swm_operations->isNotEmpty())
+                  ? $swm_operations->map(function ($operation, $index) {
+                     $title = strtolower($operation->title);
+                     $icon = 'icon-31';
+
+                     if (\Illuminate\Support\Str::contains($title, 'sweeping')) {
+                        $icon = 'fa fa-broom';
+                     } elseif (\Illuminate\Support\Str::contains($title, 'washing')) {
+                        $icon = 'icon-29';
+                     } elseif (\Illuminate\Support\Str::contains($title, 'energy')) {
+                        $icon = 'fa fa-industry-alt';
+                     } elseif (\Illuminate\Support\Str::contains($title, 'landfill')) {
+                        $icon = 'icon-12';
+                     } elseif (\Illuminate\Support\Str::contains($title, 'truck')) {
+                        $icon = 'fa fa-truck-container';
+                     }
+
+                     return [
+                        'title' => $operation->title,
+                        'icon' => $icon,
+                        'delay' => (($index % 4) * 200).'ms',
+                        'url' => route('services.show', ['operation' => $operation->id]),
+                     ];
+                  })
+                  : collect($fallbackServices);
+            @endphp
+
+            @foreach($services as $service)
+               <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
+                  <div class="feature-block-two wow fadeInUp animated" data-wow-delay="{{ $service['delay'] }}" data-wow-duration="1500ms">
+                     <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
+                        <div class="icon-box" style="margin-left: -9px;">
+                           <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
+                           <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
+                           <div class="icon"><i class="{{ $service['icon'] }}"></i></div>
+                        </div>
+                        <h5><a href="{{ $service['url'] }}" style="color:black;">{{ $service['title'] }}</a></h5>
                      </div>
-                     <h5><a href="" style="color:black;">Waste Collection</a></h5>
                   </div>
                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
-               <div class="feature-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                  <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
-                     <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
-                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
-                        <div class="icon"><i class="fa fa-truck-container"></i></div>
-                     </div>
-                     <h5><a href="" style="color:black;">Mechanical Sweeping</a></h5>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
-               <div class="feature-block-two wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
-                  <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
-                     <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
-                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
-                        <div class="icon"><i class="icon-29"></i></div>
-                     </div>
-                     <h5 style="color:black;"><a href="" style="color:black;">Mechanical Washing</a></h5>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
-               <div class="feature-block-two wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
-                  <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
-                     <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
-                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
-                        <div class="icon"><i class="fa fa-broom"></i></div>
-                     </div>
-                     <h5><a href="" style="color:black;">Manual Sweeping</a></h5>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
-               <div class="feature-block-two wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                  <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
-                     <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
-                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
-                        <div class="icon"><i class="fa fa-industry-alt"></i></div>
-                     </div>
-                     <h5><a href="" style="color:black;">Waste to Energy</a></h5>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-12 feature-block">
-               <div class="feature-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                  <div class="inner-box" style="box-shadow: 0px 10px 40px rgb(41 42 41 / 65%)">
-                     <div class="icon-box" style="margin-left: -9px;">
-                        <div class="static-shape" style="background-image: url({{ asset('images/shape/shape-18.png') }});"></div>
-                        <div class="overlay-shape" style="background-image: url({{ asset('images/shape/shape-19.png') }});"></div>
-                        <div class="icon"><i class="icon-12"></i></div>
-                     </div>
-                     <h5><a href="" style="color:black;">Sanitary Landfill Site</a></h5>
-                  </div>
-               </div>
-            </div>
+            @endforeach
          </div>
          <div class="more-btn mt_60">
-            <a href="" class="theme-btn" style="background: #3a9e1e;"><span style="color: white;">More Services</span></a>
+            <a href="{{ route('company-profile') }}" class="theme-btn" style="background: #3a9e1e;"><span style="color: white;">More Services</span></a>
          </div>
       </div>
    </section>
@@ -246,10 +174,10 @@
                <div class="image_block_three">
                   <div class="image-box mr_30">
                      <div class="image-shape" style="background-image: url({{ asset('images/shape/shape-3.png') }});"></div>
-                     <figure class="image image-1" style="box-shadow: 0px 20px 100px rgb(164 165 163 / 61%)"><img src="{{ asset('images/team/DG-SPA.jpg') }}" alt=""></figure>
+                     <figure class="image image-1" style="box-shadow: 0px 20px 100px rgb(164 165 163 / 61%)"><img src="{{ $ceo_message?->image_url ?? asset('images/team/DG-SPA.jpg') }}" alt="{{ $ceo_message?->ceo_name ?? 'CEO LWMC' }}"></figure>
                      <figure class="image image-2" style="box-shadow: 0px 20px 100px rgb(103 253 10 / 61%"><img src="{{ asset('images/logo1.png') }}" alt=""></figure>
                      <div class="video-box">
-                        <a href="https://youtu.be/NUzgZwF2tXU" class="lightbox-image" data-caption=""><i class="icon-28"></i></a>
+                        <a href="{{ $ceo_message?->video_url ?? 'https://youtu.be/NUzgZwF2tXU' }}" class="lightbox-image" data-caption=""><i class="icon-28"></i></a>
                      </div>
                   </div>
                </div>
@@ -262,12 +190,11 @@
                         <h5 style="text-align: justify;">Our work is the collection and disposal of municipal solid waste in Lahore. Through this we are proud to say that we keep the city clean.</h5>
                      </div>
                      <div class="text-box mb_30">
-                        <p style="text-align: justify;">Change is the most cherished desire of customers these days. Citizens want governments to change the style of delivering services, and make them more ‘customer focused’. If anyone wants to assess the achievements of LWMC for improving waste management services since its inception,</p>
-                        <a href="">[..]</a>
+                        <p style="text-align: justify;">{{ $ceo_message?->ceo_message ?? "Change is the most cherished desire of customers these days. Citizens want governments to change the style of delivering services, and make them more 'customer focused'. If anyone wants to assess the achievements of LWMC for improving waste management services since its inception..." }}</p>
                      </div>
                      <div class="inner-box p_relative">
                         <div class="experience-inner centred" style="box-shadow: 0px 20px 100px rgb(164 165 163 / 61%)">
-                           <h2>16</h2>
+                           <h2>{{ $ceo_message?->year_of_excellence ?? '16' }}</h2>
                            <h4>Years of excellence</h4>
                         </div>
                         <ul class="list-style-one mb_35 clearfix">
@@ -276,7 +203,7 @@
                            <li>Waste to Value</li>
                         </ul>
                         <div class="btn-box">
-                           <a href="" class="theme-btn btn-one"><span>Mr. Babar Sahib Din, CEO LWMC Message</span></a>
+                           <a href="{{ $ceo_message?->video_url ?? '' }}" class="theme-btn btn-one lightbox-image"><span>{{ $ceo_message?->ceo_name ?? 'Mr. Babar Sahib Din' }}, CEO LWMC Message</span></a>
                         </div>
                      </div>
                   </div>
@@ -294,7 +221,7 @@
                <div class="inner-box">
                   <div class="icon-box"><i class="icon-15"></i></div>
                   <div class="count-outer count-box">
-                     <span class="count-text" data-speed="1500" data-stop="20">0</span><span>k</span>
+                     <span class="count-text" data-speed="1500" data-stop="{{ $statistics['today_complaints'] ?? 20 }}">0</span>@if(($statistics['today_complaints'] ?? 20) >= 1000)<span>k</span>@endif
                   </div>
                   <h4>Today Complaints</h4>
                </div>
@@ -303,7 +230,7 @@
                <div class="inner-box">
                   <div class="icon-box"><i class="icon-16"></i></div>
                   <div class="count-outer count-box">
-                     <span class="count-text" data-speed="1500" data-stop="80">0</span><span>+</span>
+                     <span class="count-text" data-speed="1500" data-stop="{{ $statistics['resolved_complaints'] ?? 80 }}">0</span><span>+</span>
                   </div>
                   <h4>Resolved Complaints</h4>
                </div>
@@ -312,7 +239,8 @@
                <div class="inner-box">
                   <div class="icon-box"><i class="icon-17"></i></div>
                   <div class="count-outer count-box">
-                     <span class="count-text" data-speed="1500" data-stop="20">0</span><span>5k</span>
+                     @php $wasteRawValue = $statistics['total_waste_processed'] ?? 205000; @endphp
+                     <span class="count-text" data-speed="1500" data-stop="{{ $wasteRawValue >= 1000 ? floor($wasteRawValue / 1000) : $wasteRawValue }}">0</span>@if($wasteRawValue >= 1000)<span>k</span>@endif
                   </div>
                   <h4>Waste Picked & Dispose</h4>
                </div>
@@ -322,28 +250,52 @@
    </section>
    <!-- materials-section end -->
    <!-- faq-section -->
+   @php
+      $allowedHomeRichTextTags = '<p><br><strong><b><em><i><u><a><ul><ol><li><h1><h2><h3><h4><h5><h6>';
+      $hasDynamicVisionMission = isset($about_sections) && $about_sections->isNotEmpty();
+   @endphp
    <section class="faq-section pt_140" style="padding-bottom: 107px;">
       <div class="auto-container">
          <div class="row clearfix">
             <div class="col-lg-6 col-md-12 col-sm-12 content-column">
                <div class="content-box mr_30">
                   <div class="sec-title mb_50">
-                     <h2>We Clean Lahore</h2>
-                     <h2>&nbsp&nbsp&nbsp&nbsp&nbsp Like Never Before</h2>
+                     <h2>{{ $hasDynamicVisionMission && $about_sections->count() === 1 ? $about_section?->title : 'We Clean Lahore' }}</h2>
+                     <h2>&nbsp&nbsp&nbsp&nbsp&nbsp {{ $hasDynamicVisionMission && $about_sections->count() === 1 ? ($about_section?->subtitle ?? 'Like Never Before') : 'Like Never Before' }}</h2>
                   </div>
                   <ul class="accordion-box">
+                     @if($hasDynamicVisionMission)
+                        @foreach($about_sections as $section)
+                           <li class="accordion block {{ $loop->first ? 'active-block' : '' }}">
+                              <div class="acc-btn {{ $loop->first ? 'active' : '' }}">
+                                 <div class="icon-box"><i class="icon-33"></i></div>
+                                 <h4>{{ $about_sections->count() === 1 ? 'About Lahore Waste Management Company' : $section->title }}</h4>
+                              </div>
+                              <div class="acc-content {{ $loop->first ? 'current' : '' }}">
+                                 <div class="text">
+                                    {!! strip_tags((string) $section->content, $allowedHomeRichTextTags) !!}
+                                 </div>
+                              </div>
+                           </li>
+                        @endforeach
+                     @else
                      <li class="accordion block active-block">
                         <div class="acc-btn active">
                            <div class="icon-box"><i class="icon-33"></i></div>
-                           <h4>Our Vision</h4>
+                           <h4>{{ $about_section ? 'About Lahore Waste Management Company' : 'Our Vision' }}</h4>
                         </div>
                         <div class="acc-content current">
                            <div class="text">
-                              <p>Suthra Punjab envisions a Zero-Waste Punjab through the implementation of world-class waste collection, recycling, and disposal systems. The initiative fosters job creation, attracts foreign investment, and ensures a cleaner, healthier environment through unified and accountable governance.</p>
+                              @if($about_section)
+                                 {!! strip_tags((string) $about_section->content, $allowedHomeRichTextTags) !!}
+                              @else
+                                 <p>Suthra Punjab envisions a Zero-Waste Punjab through the implementation of world-class waste collection, recycling, and disposal systems. The initiative fosters job creation, attracts foreign investment, and ensures a cleaner, healthier environment through unified and accountable governance.</p>
+                              @endif
                            </div>
                         </div>
                      </li>
-                     <li class="accordion block">
+                     @unless($about_section)
+                   <li class="accordion block">
                         <div class="acc-btn">
                            <div class="icon-box"><i class="icon-33"></i></div>
                            <h4>Our Mission</h4>
@@ -354,6 +306,8 @@
                            </div>
                         </div>
                      </li>
+                     @endunless
+                     @endif
                   </ul>
                </div>
             </div>
@@ -362,7 +316,7 @@
                   <div class="image-box ml_30">
                      <div class="image-shape" style="background-image: url({{ asset('images/shape/shape-22.png') }});"></div>
                      <iframe width="580" height="450"
-                        src="https://www.youtube.com/embed/tNW84qqMHyU">
+                        src="{{ $about_section?->embed_video_url ?? 'https://www.youtube.com/embed/tNW84qqMHyU' }}">
                      </iframe>
                      <figure class="image image-2" style="box-shadow: 0px 20px 100px rgb(103 253 10 / 61%"><img src="{{ asset('images/logo1.png') }}" alt=""></figure>
                   </div>
@@ -378,8 +332,8 @@
                 <div class="inner-box">
                     <h2>Request a <span>bin</span> &amp; or <span> report</span> a sanitation issue with one click.</h2>
                     <div class="btn-box">
-                        <a href="Contact-Us" class="theme-btn btn-one"><span>Contact Us</span></a>
-                        <a href="contact.html" class="theme-btn btn-two"><span>Request a Bin</span></a>
+                        <a href="{{ route('contact.index') }}" class="theme-btn btn-one"><span>Contact Us</span></a>
+                        <a href="{{ route('contact.bin-request') }}" class="theme-btn btn-two"><span>Request a Bin</span></a>
                     </div>
                 </div>
             </div>
@@ -390,49 +344,41 @@
          <div class="sec-title mb_50">
             <h2>News <span style="color:#3a9e1e;"> Alerts</span></h2>
          </div>
-         <div class="three-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
-            <div class="testimonial-block-one">
-               <div class="inner-box">
-                  <div class="text-box">
-                     <p>وزیراعلیٰ پنجاب مریم نواز شریف کے ویژن ستھرا پنجاب پر عملدر آمد جاری،ایل ڈبلیو ایم سی کے محنتی ورکرز شہر لاہور کو صاف اور شفاف رکھنے کیلئے فیلڈ میں متحرک</p>
-                     <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
+         @if($news_alerts->isNotEmpty())
+            <div class="three-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+               @foreach($news_alerts as $newsAlert)
+                  <div class="testimonial-block-one">
+                     <div class="inner-box">
+                        <div class="text-box">
+                           <p class="news-alert-description">{{ $newsAlert->description }}</p>
+                           <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
+                        </div>
+                        <div class="author-box">
+                           <h3>{{ $newsAlert->title }}</h3>
+                           <span class="designation">Posted by Admin {{ $newsAlert->created_at->format('d-M-Y') }}</span>
+                        </div>
+                     </div>
                   </div>
-                  <div class="author-box">
-                     <h3>CEO Visited Ravi Town</h3>
-                     <span class="designation">Posted by Admin 01-JAN-2024</span>
-                  </div>
-               </div>
+               @endforeach
             </div>
-            <div class="testimonial-block-one">
-               <div class="inner-box">
-                  <div class="text-box">
-                     <p>وزیراعلیٰ پنجاب مریم نواز شریف کے ویژن ستھرا پنجاب پر عملدر آمد جاری،ایل ڈبلیو ایم سی کے محنتی ورکرز شہر لاہور کو صاف اور شفاف رکھنے کیلئے فیلڈ میں متحرک</p>
-                     <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
-                  </div>
-                  <div class="author-box">
-                     <h3>CEO Visited Ravi Town</h3>
-                     <span class="designation">Posted by Admin 01-JAN-2024</span>
-                  </div>
-               </div>
-            </div>
-            <div class="testimonial-block-one">
-               <div class="inner-box">
-                  <div class="text-box">
-                     <p>وزیراعلیٰ پنجاب مریم نواز شریف کے ویژن ستھرا پنجاب پر عملدر آمد جاری،ایل ڈبلیو ایم سی کے محنتی ورکرز شہر لاہور کو صاف اور شفاف رکھنے کیلئے فیلڈ میں متحرک</p>
-                     <figure class="thumb-box"><img src="{{ asset('images/resource/testimonial-1.png') }}" alt=""></figure>
-                  </div>
-                  <div class="author-box">
-                     <h3>CEO Visited Ravi Town</h3>
-                     <span class="designation">Posted by Admin 01-JAN-2024</span>
-                  </div>
-               </div>
-            </div>
-         </div>
+         @else
+            <p class="centred">No news alerts available at the moment.</p>
+         @endif
       </div>
    </section>
    <!-- news-section -->
    <!-- clients-section -->
    <section class="subscribe-section">
+    <style>
+        .news-alert-description {
+            max-height: 100px; /* Adjust this value as needed */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Adds "..." for overflowing text */
+            display: -webkit-box;
+            -webkit-line-clamp: 4; /* Limits to 4 lines, adjust as needed */
+            -webkit-box-orient: vertical;
+        }
+    </style>
             <div class="pattern-layer">
                 <div class="pattern-1" style="background-image: url({{ asset('images/shape/shape-12.png') }});"></div>
                 <div class="pattern-2" style="background-image: url({{ asset('images/shape/shape-2.png') }});"></div>
@@ -444,7 +390,8 @@
                         <div class="content-box">
                             <h2>Subscribe to our <br>newsletter</h2>
                             <div class="form-inner">
-                                <form method="post" action="contact.html">
+                                <form method="POST" action="{{ route('newsletter.subscribe') }}">
+                                    @csrf
                                     <div class="form-group">
                                         <input type="email" name="email" placeholder="Your email" required="">
                                         <button type="submit">Subscribe</button>
