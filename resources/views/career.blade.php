@@ -42,15 +42,44 @@
                                        <tr>
                                           <td colspan="4"></td>
                                        </tr>
-                                       <tr>
-                                          <td>1</td>
-                                          <td><b>Assistant Manager Finance</b><span style="color:red; font-size: x-small; font-weight: bold;"> NEW</span></td>
-                                          <td>Advertisement Download</td>
-                                          <td>Apply Through Online Job Portal</td>
-                                       </tr>
-                                       <tr>
-                                          <td colspan="4"></td>
-                                       </tr>
+                                       @forelse($careers as $key => $career)
+                                          <tr>
+                                             <td>{{ $key + 1 }}</td>
+                                             <td>
+                                                <b>{{ $career->title }}</b>
+                                                @if($career->created_at && $career->created_at->diffInDays(now()) < 7)
+                                                   <span style="color:red; font-size: x-small; font-weight: bold;"> NEW</span>
+                                                @endif
+                                             </td>
+                                             <td>
+                                                @if($career->attachment_url)
+                                                   <a href="{{ $career->attachment_url }}" target="_blank">Advertisement Download</a>
+                                                @else
+                                                   Advertisement Download
+                                                @endif
+                                             </td>
+                                             <td>
+                                                @if($career->apply_link)
+                                                   <a href="{{ $career->apply_link }}" target="_blank">Apply Through Online Job Portal</a>
+                                                @else
+                                                   Apply Through Online Job Portal
+                                                @endif
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td colspan="4"></td>
+                                          </tr>
+                                       @empty
+                                          <tr>
+                                             <td>1</td>
+                                             <td><b>Assistant Manager Finance</b><span style="color:red; font-size: x-small; font-weight: bold;"> NEW</span></td>
+                                             <td>Advertisement Download</td>
+                                             <td>Apply Through Online Job Portal</td>
+                                          </tr>
+                                          <tr>
+                                             <td colspan="4"></td>
+                                          </tr>
+                                       @endforelse
                                     </tbody>
                                  </table>
                               </div>

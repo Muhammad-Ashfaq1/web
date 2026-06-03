@@ -13,7 +13,7 @@
                <div class="row clearfix centred">
                   <div class="col-lg-12 col-md-12 col-sm-12 title-column">
                      <div class="sec-title light pr_90">
-                        <h2>Become a Part of LWMC</span></h2>
+                        <h2>Become a Part of LWMC</h2>
                      </div>
                   </div>
                </div>
@@ -29,25 +29,43 @@
                   <h2>Register as a Volunteer</h2>
                </div>
                <div class="form-inner">
-                  <form action="" method="post" class="default-form">
+                  @if(session('success'))
+                     <div class="alert alert-success">{{ session('success') }}</div>
+                  @endif
+                  <form action="{{ route('volunteer.store') }}" method="post" class="default-form" enctype="multipart/form-data">
+                     @csrf
                      <div class="row clearfix">
                         <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                           <input type="text" name="name" placeholder="Your name" required>
+                           <input type="text" name="name" value="{{ old('name') }}" placeholder="Your name" required>
+                           @error('name')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                           <input type="email" name="email" placeholder="Your email" required>
+                           <input type="email" name="email" value="{{ old('email') }}" placeholder="Your email" required>
+                           @error('email')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                           <input type="text" name="phone" placeholder="Phone" required>
+                           <input type="text" name="phone" value="{{ old('phone') }}" placeholder="Phone" required>
+                           @error('phone')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                           <input type="text" name="cnic" placeholder="CNIC" required>
+                           <input type="text" name="education" value="{{ old('education') }}" placeholder="Education" required>
+                           @error('education')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                           <input type="text" name="subject" placeholder="Address" required>
+                           <input type="text" name="address" value="{{ old('address') }}" placeholder="Address" required>
+                           @error('address')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                           <textarea name="message" placeholder="Comments"></textarea>
+                           <textarea name="experience" placeholder="Comments">{{ old('experience') }}</textarea>
+                           @error('experience')<div class="text-danger">{{ $message }}</div>@enderror
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                           <input type="file" name="resume" class="form-control" accept=".pdf,.doc,.docx">
+                           @error('resume')<div class="text-danger">{{ $message }}</div>@enderror
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                           <input type="file" name="photo" class="form-control" accept="image/*">
+                           @error('photo')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
                            <button type="submit" class="theme-btn btn-one shadow"><span>Register</span></button>

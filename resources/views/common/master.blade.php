@@ -95,6 +95,8 @@
     <!-- main-js -->
     <script src="/js/script.js"></script>
 
+    @yield('extra-js')
+
 <!-- End of .page_wrapper -->
 
 </html>

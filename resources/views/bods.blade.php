@@ -13,7 +13,7 @@
                <div class="row clearfix centred">
                   <div class="col-lg-12 col-md-12 col-sm-12 title-column">
                      <div class="sec-title light pr_90">
-                        <h2>Board of Directors</span></h2>
+                        <h2>Board of Directors</h2>
                      </div>
                   </div>
                </div>
@@ -38,54 +38,65 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                 <th scope="row">1</th>
-                                 <td style="text-align: left;">Mr. Bilal Zulfiqar Ali Graduate PU	</td>
-                                 <td>Independent</td>
-                                 <td>Chairman</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">2</th>
-                                 <td style="text-align: left;">Mr. Babar Sahib Din</td>
-                                 <td>Executive</td>
-                                 <td>Director</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">3</th>
-                                 <td style="text-align: left;">Mr. Capt. (Retd.) Bilal Hashim Add. Secretary Finance LGF	</td>
-                                 <td>Non-Executive</td>
-                                 <td>Director</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">3</th>
-                                 <td style="text-align: left;">MMs. Rafia Haider DC-Lahore</td>
-                                 <td>Non-Executive</td>
-                                 <td>Director</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">4</th>
-                                 <td style="text-align: left;">Ms. Maria Tariq Add. Secretary Dev, LG & CD</td>
-                                 <td>Ex-Officio</td>
-                                 <td>Director</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">5</th>
-                                 <td style="text-align: left;">Mr. Mian Basharat Ali Dola Advocate High Court B.A - LLB</td>
-                                 <td>Non-Executive Technical/ Independent	</td>
-                                 <td>Director</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">5</th>
-                                 <td style="text-align: left;">Mr. Muhammad Saleem FCMA</td>
-                                 <td>Non-Executive Independent	</td>
-                                 <td>Director</td>
-                              </tr>
-                              <tr>
-                                 <th scope="row">5</th>
-                                 <td style="text-align: left;">Dr. Sobia Bhatti Phd. Environmental Sciences</td>
-                                 <td>Technical</td>
-                                 <td>Director</td>
-                              </tr>
+                              @if(isset($boardMembers) && $boardMembers->isNotEmpty())
+                                 @foreach($boardMembers as $member)
+                                    <tr>
+                                       <th scope="row">{{ $loop->iteration }}</th>
+                                       <td style="text-align: left;">{{ $member->name }}</td>
+                                       <td>{{ $member->bio ? \Illuminate\Support\Str::limit(strip_tags($member->bio), 60) : 'Board Member' }}</td>
+                                       <td>{{ $member->position }}</td>
+                                    </tr>
+                                 @endforeach
+                              @else
+                                 <tr>
+                                    <th scope="row">1</th>
+                                    <td style="text-align: left;">Mr. Bilal Zulfiqar Ali Graduate PU</td>
+                                    <td>Independent</td>
+                                    <td>Chairman</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">2</th>
+                                    <td style="text-align: left;">Mr. Babar Sahib Din</td>
+                                    <td>Executive</td>
+                                    <td>Director</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">3</th>
+                                    <td style="text-align: left;">Mr. Capt. (Retd.) Bilal Hashim Add. Secretary Finance LGF</td>
+                                    <td>Non-Executive</td>
+                                    <td>Director</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">4</th>
+                                    <td style="text-align: left;">MMs. Rafia Haider DC-Lahore</td>
+                                    <td>Non-Executive</td>
+                                    <td>Director</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">5</th>
+                                    <td style="text-align: left;">Ms. Maria Tariq Add. Secretary Dev, LG & CD</td>
+                                    <td>Ex-Officio</td>
+                                    <td>Director</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">6</th>
+                                    <td style="text-align: left;">Mr. Mian Basharat Ali Dola Advocate High Court B.A - LLB</td>
+                                    <td>Non-Executive Technical/ Independent</td>
+                                    <td>Director</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">7</th>
+                                    <td style="text-align: left;">Mr. Muhammad Saleem FCMA</td>
+                                    <td>Non-Executive Independent</td>
+                                    <td>Director</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">8</th>
+                                    <td style="text-align: left;">Dr. Sobia Bhatti Phd. Environmental Sciences</td>
+                                    <td>Technical</td>
+                                    <td>Director</td>
+                                 </tr>
+                              @endif
                            </tbody>
                         </table>
                      </div>
